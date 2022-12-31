@@ -50,13 +50,21 @@ function JuMP._new_parameter(m::UpperModel, value::Number)
     return JuMP.NonlinearParameter(upper, length(nldata.nlparamvalues))
 end
 
+#=
 function JuMP._new_parameter(::LowerModel, ::Number)
     return no_nlp_lower_param()
 end
 function JuMP._new_parameter(::BilevelModel, ::Number)
     return no_nlp()
 end
-
+=#
+function JuMP.@NLparameter(::LowerModel, ::Number)
+    return no_nlp_lower_param()
+end
+function JuMP.@NLparameter(::BilevelModel, ::Number)
+    return no_nlp()
+end
+    
 # function JuMP.set_objective_function(m::UpperModel, func::JuMP._NonlinearExprData)
 #     JuMP.set_objective_function(mylevel_model(m), func)
 #     return nothing
