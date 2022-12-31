@@ -104,11 +104,11 @@ function JuMP.set_objective(
     return
 end
 =#
-
+# _NonlinearExpressionIO
 function JuMP.set_objective(
     m::UpperModel,
     sense::MOI.OptimizationSense,
-    ex::JuMP._NonlinearExpression,
+    ex::JuMP.NonlinearExpression,
 )
     JuMP._init_NLP(m)
     JuMP.set_objective_sense(m, sense)
