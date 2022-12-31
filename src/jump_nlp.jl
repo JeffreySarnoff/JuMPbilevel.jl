@@ -58,17 +58,20 @@ function JuMP._new_parameter(::BilevelModel, ::Number)
     return no_nlp()
 end
 =#
-function JuMP.@NLparameter(m::UpperModel, value::Number)
+
+function JuMP.add_nonlinear_parameter(m::UpperModel, value::Number)
     JuMP._init_NLP(m)
     upper = m.m.upper
     nldata::JuMP._NLPData = upper.nlp_data
     push!(nldata.nlparamvalues, value)
     return JuMP.NonlinearParameter(upper, length(nldata.nlparamvalues))
 end
-function JuMP.@NLparameter(::LowerModel, ::Number)
+    
+function JuMP.add_nonlinear_parameter(::LowerModel, ::Number)
     return no_nlp_lower_param()
 end
-function JuMP.@NLparameter(::BilevelModel, ::Number)
+    
+function JuMP.add_nonlinear_parameter(::BilevelModel, ::Number)
     return no_nlp()
 end
     
