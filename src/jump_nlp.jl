@@ -124,12 +124,12 @@ function JuMP.set_objective(
     return
 end
 
-function JuMP._parse_NL_expr_runtime(m::UpperModel, x, tape, parent, values)
-    JuMP._parse_NL_expr_runtime(mylevel_model(m), x, tape, parent, values)
+function JuMP._parse_nonlinear_expression_inner(m::UpperModel, x, tape, parent, values)
+    JuMP._parse_nonlinear_expression_inner(mylevel_model(m), x, tape, parent, values)
     return nothing
 end
 
-function JuMP._parse_NL_expr_runtime(
+function JuMP._parse_nonlinear_expression_inner(
     m::UpperModel,
     x::BilevelVariableRef,
     tape,
@@ -142,7 +142,7 @@ function JuMP._parse_NL_expr_runtime(
             "upper model, it is a LowerOnly variable",
         )
     end
-    JuMP._parse_NL_expr_runtime(
+    JuMP._parse_nonlinear_expression_inner(
         mylevel_model(m),
         upper_ref(x),
         tape,
