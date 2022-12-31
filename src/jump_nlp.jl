@@ -108,7 +108,7 @@ end
 function JuMP.set_objective(
     m::UpperModel,
     sense::MOI.OptimizationSense,
-    ex::JuMP.NonlinearExpression,
+    ex::JuMP._NonlinearExpressionIO,
 )
     JuMP._init_NLP(m)
     JuMP.set_objective_sense(m, sense)
@@ -118,7 +118,7 @@ end
 function JuMP.set_objective(
     ::LowerModel,
     ::MOI.OptimizationSense,
-    ::JuMP.NonlinearExpression,
+    ::JuMP._NonlinearExpressionIO,
 )
     no_nlp_lower()
     return
