@@ -240,7 +240,7 @@ end
 #     )
 # end
 
-function JuMP._parse_NL_expr_runtime(m::LowerModel, x, tape, parent, values)
+function JuMP._parse_nonlinear_expression_inner(m::LowerModel, x, tape, parent, values)
     return no_nlp_lower()
 end
 
