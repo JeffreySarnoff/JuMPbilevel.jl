@@ -83,6 +83,8 @@ end
 #     no_nlp_lower()
 #     return nothing
 # end
+ 
+#=
 function JuMP.set_objective(
     m::UpperModel,
     sense::MOI.OptimizationSense,
@@ -97,6 +99,26 @@ function JuMP.set_objective(
     ::LowerModel,
     ::MOI.OptimizationSense,
     ::JuMP._NonlinearExprData,
+)
+    no_nlp_lower()
+    return
+end
+=#
+
+function JuMP.set_objective(
+    m::UpperModel,
+    sense::MOI.OptimizationSense,
+    ex::JuMP._NonlinearExpression,
+)
+    JuMP._init_NLP(m)
+    JuMP.set_objective_sense(m, sense)
+    m.nlp_data.nlobj = ex
+    return
+end
+function JuMP.set_objective(
+    ::LowerModel,
+    ::MOI.OptimizationSense,
+    ::JuMP.NonlinearExpression,
 )
     no_nlp_lower()
     return
